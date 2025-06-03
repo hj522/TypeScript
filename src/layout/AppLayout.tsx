@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import PlaylistHead from './components/PlaylistHead';
-import EmptyPlaylist from './components/EmptyPlaylist';
+import Playlist from './components/Playlist';
 
 const Layout = styled('div')({
     display: 'flex',
@@ -31,6 +31,17 @@ const ContentBox = styled(Box)(({ theme }) => ({
     marginRight: '8px',
 }));
 
+const PlaylistBox = styled(Box)(({ theme }) => ({
+    height: '100%',
+    borderRadius: '8px',
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.background.paper,
+    width: '100%',
+    paddingTop: '8px',
+    marginBottom: '8px',
+    marginRight: '8px',
+}));
+
 const NavList = styled('ul')({
     listStyle: 'none',
     padding: 10,
@@ -48,6 +59,9 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
         color: theme.palette.text.primary,
     },
     '&:active': {
+        color: theme.palette.text.primary,
+    },
+    '&.active': {
         color: theme.palette.text.primary,
     },
 }));
@@ -74,10 +88,10 @@ const AppLayout = () => {
                     </NavList>
                 </ContentBox>
                 {/* 플레이리스트 */}
-                <ContentBox>
+                <PlaylistBox>
                     <PlaylistHead />
-                    <EmptyPlaylist />
-                </ContentBox>
+                    <Playlist />
+                </PlaylistBox>
             </Sidebar>
 
             <Outlet />
