@@ -40,7 +40,6 @@ function App() {
                     <Route path="playlist/:id" element={<PlaylistDetailPage />} />
                     <Route path="/playlist" element={<PlaylistPage />} />
                 </Route>
-                {/* // <Route path="/admin" element={AdminLayout}></Route> */}
             </Routes>
         </Suspense>
     );
