@@ -4,6 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import PlaylistHead from './components/PlaylistHead';
 import Playlist from './components/Playlist';
+import Navbar from './components/Navbar';
 
 const Layout = styled('div')({
     display: 'flex',
@@ -93,8 +94,10 @@ const AppLayout = () => {
                     <Playlist />
                 </PlaylistBox>
             </Sidebar>
-
-            <Outlet />
+            <ContentBox>
+                <Navbar />
+                <Outlet />
+            </ContentBox>
         </Layout>
     );
 };
