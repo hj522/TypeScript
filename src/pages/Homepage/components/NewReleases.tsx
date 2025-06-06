@@ -5,7 +5,7 @@ import ErrorMessage from '../../../common/components/ErrorMessage';
 import Card from '../../../common/components/Card';
 const NewReleases = () => {
     const { data, error, isLoading } = useGetNewReleases();
-    console.log('album >> ', data);
+    console.log('album ->> ', data);
 
     if (isLoading) {
         return <Loading />;
