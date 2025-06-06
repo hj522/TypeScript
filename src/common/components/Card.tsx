@@ -8,8 +8,8 @@ interface CardProps {
 }
 
 const CardContainer = styled('div')(({ theme }) => ({
-    width: '200px',
-    minWidth: '200px',
+    width: '100%',
+    minWidth: '170px',
     height: 'auto',
     borderRadius: '5px',
     padding: '8px',
