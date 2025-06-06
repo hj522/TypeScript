@@ -10,9 +10,9 @@ interface CardProps {
 const CardContainer = styled('div')(({ theme }) => ({
     width: '100%',
     minWidth: '170px',
-    height: 'auto',
+    height: '100%',
     borderRadius: '5px',
-    padding: '8px',
+    padding: '10px',
     backgroundColor: theme.palette.background.paper,
     '&:hover': {
         backgroundColor: theme.palette.action.hover,
