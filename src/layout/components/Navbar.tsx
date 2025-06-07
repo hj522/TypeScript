@@ -19,6 +19,7 @@ const Navbar = () => {
     const { data: userProfile, isLoading } = useGetCurrentUserProfile();
 
     if (isLoading) {
+        console.log('loading...');
         return <div style={{ height: '6%' }} />;
     }
 
