@@ -31,19 +31,19 @@ function App() {
     }, [code, codeVerifier, exchangeToken]);
 
     return (
-        // <Suspense fallback={<Loading />}>
-        <Routes>
-            <Route path="/" element={<AppLayout />}>
-                <Route index element={<HomePage />} />
-                <Route path="callback" element={<HomePage />} />
-                <Route path="search" element={<SearchPage />} />
-                <Route path="search/:keyword" element={<SearchWithKeywordPage />} />
-                <Route path="playlist/:id" element={<PlaylistDetailPage />} />
-                <Route path="/playlist" element={<PlaylistPage />} />
-            </Route>
-            <Route path="/callback" element={<AppCallback />} />
-        </Routes>
-        // </Suspense>
+        <Suspense fallback={<Loading />}>
+            <Routes>
+                <Route path="/" element={<AppLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="callback" element={<HomePage />} />
+                    <Route path="search" element={<SearchPage />} />
+                    <Route path="search/:keyword" element={<SearchWithKeywordPage />} />
+                    <Route path="playlist/:id" element={<PlaylistDetailPage />} />
+                    <Route path="/playlist" element={<PlaylistPage />} />
+                </Route>
+                <Route path="/callback" element={<AppCallback />} />
+            </Routes>
+        </Suspense>
     );
 }
 
