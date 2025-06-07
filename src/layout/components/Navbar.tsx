@@ -7,7 +7,8 @@ const ProfileContainer = styled('div')({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: '100%',
+    borderRadius: '8px',
+    // width: '100%',
 });
 
 const ProfileImg = styled('div')({
@@ -27,15 +28,13 @@ const Navbar = () => {
     return (
         <ProfileContainer>
             {userProfile ? (
-                <ProfileContainer>
-                    <ProfileImg>
-                        {userProfile.images[0] ? (
-                            <Avatar src={userProfile.images[0]?.url} />
-                        ) : (
-                            <Avatar src="../../common/components/spotify_basic_profile.png" />
-                        )}
-                    </ProfileImg>
-                </ProfileContainer>
+                <ProfileImg>
+                    {userProfile.images[0] ? (
+                        <Avatar src={userProfile.images[0]?.url} />
+                    ) : (
+                        <Avatar src="../../common/components/spotify_basic_profile.png" />
+                    )}
+                </ProfileImg>
             ) : (
                 <LoginButton />
             )}
