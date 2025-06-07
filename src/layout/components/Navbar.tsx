@@ -33,7 +33,9 @@ const Navbar = () => {
             </ProfileImg>
         </ProfileContainer>
     ) : (
-        <LoginButton />
+        <ProfileContainer>
+            <LoginButton />
+        </ProfileContainer>
     );
 };
 
