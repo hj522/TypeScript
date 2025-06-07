@@ -1,4 +1,4 @@
-import { Avatar, styled } from '@mui/material';
+import { Avatar, Box, styled } from '@mui/material';
 import LoginButton from '../../common/components/LoginButton';
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 import Loading from '../../common/components/Loading';
@@ -7,6 +7,7 @@ const ProfileContainer = styled('div')({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    width: '100%',
 });
 
 const ProfileImg = styled('div')({
@@ -23,19 +24,21 @@ const Navbar = () => {
         return <div style={{ height: '6%' }} />;
     }
 
-    return userProfile ? (
+    return (
         <ProfileContainer>
-            <ProfileImg>
-                {userProfile.images[0] ? (
-                    <Avatar src={userProfile.images[0]?.url} />
-                ) : (
-                    <Avatar src="../../common/components/spotify_basic_profile.png" />
-                )}
-            </ProfileImg>
-        </ProfileContainer>
-    ) : (
-        <ProfileContainer>
-            <LoginButton />
+            {userProfile ? (
+                <ProfileContainer>
+                    <ProfileImg>
+                        {userProfile.images[0] ? (
+                            <Avatar src={userProfile.images[0]?.url} />
+                        ) : (
+                            <Avatar src="../../common/components/spotify_basic_profile.png" />
+                        )}
+                    </ProfileImg>
+                </ProfileContainer>
+            ) : (
+                <LoginButton />
+            )}
         </ProfileContainer>
     );
 };
