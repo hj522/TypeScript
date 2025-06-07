@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material';
 import useGetNewReleases from '../../../hooks/useGetNewReleases';
-import Loading from '../../../common/components/Loading';
 import ErrorMessage from '../../../common/components/ErrorMessage';
 import Card from '../../../common/components/Card';
+import Loading from '../../../common/components/Loading';
 const NewReleases = () => {
     const { data, error, isLoading } = useGetNewReleases();
     console.log('album ->> ', data);
@@ -10,6 +10,7 @@ const NewReleases = () => {
     if (isLoading) {
         return <Loading />;
     }
+
     if (error) {
         return <ErrorMessage errorMessage={error.message} />;
     }

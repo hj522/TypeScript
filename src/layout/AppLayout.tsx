@@ -5,6 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import PlaylistHead from './components/PlaylistHead';
 import Playlist from './components/Playlist';
 import Navbar from './components/Navbar';
+import { Suspense } from 'react';
+import Loading from '../common/components/Loading';
 
 const Layout = styled('div')({
     display: 'flex',
