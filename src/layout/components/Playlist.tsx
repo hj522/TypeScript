@@ -40,15 +40,17 @@ const Playlist = () => {
         }
     }, [inView]);
 
-    const { data: user } = useGetCurrentUserProfile(); // 유저 정보 들고오기기
+    const { data: user, isLoading: isUserLoading } = useGetCurrentUserProfile(); // 유저 정보 들고오기기
 
-    if (isLoading) {
+    if (!user) return <EmptyPlaylist />;
+
+    if (isLoading || isUserLoading) {
         return <Loading />;
     }
+
     if (error) {
         return <ErrorMessage errorMessage={error.message} />;
     }
-    if (!user) return <EmptyPlaylist />;
 
     return (
         <div>
