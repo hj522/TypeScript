@@ -41,7 +41,6 @@ const Playlist = () => {
     }, [inView]);
 
     const { data: user } = useGetCurrentUserProfile(); // 유저 정보 들고오기기
-    if (!user) return <EmptyPlaylist />;
 
     if (isLoading) {
         return <Loading />;
@@ -49,6 +48,7 @@ const Playlist = () => {
     if (error) {
         return <ErrorMessage errorMessage={error.message} />;
     }
+    if (!user) return <EmptyPlaylist />;
 
     return (
         <div>

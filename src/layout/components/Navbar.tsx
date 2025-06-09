@@ -1,7 +1,8 @@
-import { Avatar, Box, styled } from '@mui/material';
+import { Avatar, styled } from '@mui/material';
 import LoginButton from '../../common/components/LoginButton';
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 import Loading from '../../common/components/Loading';
+import BasicAvatar from '@mui/icons-material/AccountCircle';
 
 const ProfileContainer = styled('div')({
     display: 'flex',
@@ -20,11 +21,6 @@ const ProfileImg = styled('div')({
 const Navbar = () => {
     const { data: userProfile, isLoading } = useGetCurrentUserProfile();
 
-    // if (isLoading) {
-    //     console.log('loading...');
-    //     return <div style={{ height: '6%' }} />;
-    // }
-
     if (isLoading) {
         return <Loading />;
     }
@@ -36,7 +32,9 @@ const Navbar = () => {
                     {userProfile.images[0] ? (
                         <Avatar src={userProfile.images[0]?.url} />
                     ) : (
-                        <Avatar src="../../common/components/spotify_basic_profile.png" />
+                        <Avatar>
+                            <BasicAvatar />
+                        </Avatar>
                     )}
                 </ProfileImg>
             ) : (
