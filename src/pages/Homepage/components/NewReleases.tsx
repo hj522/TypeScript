@@ -5,7 +5,7 @@ import Card from '../../../common/components/Card';
 import Loading from '../../../common/components/Loading';
 const NewReleases = () => {
     const { data, error, isLoading } = useGetNewReleases();
-    console.log('album ->> ', data);
+    // console.log('album ->> ', data);
 
     if (isLoading) {
         return <Loading />;

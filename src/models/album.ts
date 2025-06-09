@@ -1,17 +1,10 @@
+import { ApiResponse } from './apiResponse';
 import { Artist } from './artist';
 import { ExternalUrls, Image, Restriction } from './commonType';
 
 // 앨범 정보
 export interface GetNewReleasesResponse {
-    albums: {
-        href: string;
-        limit: number;
-        next?: string;
-        offset: number;
-        previous?: string;
-        total: number;
-        items: SimplifiedAlbum[];
-    };
+    albums: ApiResponse<SimplifiedAlbum>;
 }
 
 // items 따로 빼둠
