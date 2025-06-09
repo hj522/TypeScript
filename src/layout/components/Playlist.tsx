@@ -52,18 +52,22 @@ const Playlist = () => {
 
     return (
         <div>
-            {data && data?.pages[0].total > 0 ? (
+            {data && data.pages[0].total > 0 ? (
                 <PlaylistContainer>
-                    {data?.pages[0].items.map((item, idx) => (
-                        <PlaylistItem
-                            key={idx}
-                            id={item.id}
-                            name={item.name}
-                            artist={item.type + ' • ' + (item.owner?.display_name || 'no artist')}
-                            image={(item.images && item.images[0]?.url) || null}
-                        />
-                    ))}
-                    <div ref={ref}>{isFetchingNextPage && <Loading />}</div>
+                    {data.pages.flatMap((page) =>
+                        page.items.map((item, idx) => (
+                            <PlaylistItem
+                                key={item.id + '-' + idx}
+                                id={item.id}
+                                name={item.name}
+                                artist={item.type + ' • ' + (item.owner?.display_name || 'no artist')}
+                                image={item.images?.[0]?.url || null}
+                            />
+                        ))
+                    )}
+                    <div ref={ref} style={{ minHeight: '40px' }}>
+                        {isFetchingNextPage && <Loading />}
+                    </div>
                 </PlaylistContainer>
             ) : (
                 <EmptyPlaylist />
