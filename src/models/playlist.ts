@@ -1,5 +1,6 @@
 import { ApiResponse } from './apiResponse';
-import { ExternalUrls, Image, Owner } from './commonType';
+import { ExternalUrls, Followers, Image, Owner } from './commonType';
+import { Episode, Track } from './track';
 
 // playlist item
 export interface PlaylistProps {
@@ -7,6 +8,8 @@ export interface PlaylistProps {
     name?: string;
     artist?: string;
     image?: string;
+    handleClick: (id: string) => void;
+    selectedId: string;
 }
 
 export interface GetCurrentUserPlaylistRequest {
@@ -17,7 +20,7 @@ export interface GetCurrentUserPlaylistRequest {
 // interface-> 넣을key값이 없기 때문에 type으로 사용
 export type GetCurrentUserPlaylistResponse = ApiResponse<SimplifiedPlaylist>;
 
-export interface SimplifiedPlaylist {
+export interface BasicPlaylist {
     collaborative?: boolean;
     description?: string;
     external_urls?: ExternalUrls;
@@ -28,10 +31,39 @@ export interface SimplifiedPlaylist {
     owner?: Owner;
     public?: boolean;
     snapshot_id?: string;
+    type?: 'playlist';
+    uri?: string;
+}
+
+export interface SimplifiedPlaylist extends BasicPlaylist {
     tracks?: {
         href?: string;
         total?: number;
     };
-    type?: string;
-    uri?: string;
+}
+
+export interface Playlist extends BasicPlaylist {
+    tracks: ApiResponse<PlaylistTrack>;
+    followers: Followers;
+}
+
+export interface PlaylistTrack {
+    added_at?: string | null;
+    added_by?: {
+        external_urls?: ExternalUrls;
+        followers?: Followers;
+        href?: string;
+        id?: string;
+        type?: string;
+        uri?: string;
+    } | null;
+    is_local?: boolean;
+    track: Track | Episode;
+}
+
+export interface getPlaylistRequest {
+    playlist_id: string;
+    market?: string;
+    fields?: string;
+    additional_types?: string;
 }

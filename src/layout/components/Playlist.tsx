@@ -6,7 +6,9 @@ import Loading from '../../common/components/Loading';
 import ErrorMessage from '../../common/components/ErrorMessage';
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { PlaylistProps } from '../../models/playlist';
+import { useNavigate } from 'react-router';
 
 const PlaylistContainer = styled('div')(({ theme }) => ({
     height: '100%',
@@ -23,16 +25,23 @@ const PlaylistContainer = styled('div')(({ theme }) => ({
 }));
 
 // Library
-const Playlist = () => {
+const Playlist = ({ playlists }: PlaylistProps) => {
     // 무한스크롤 세팅
     const { ref, inView } = useInView();
+
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+
+    const navigate = useNavigate();
+    const handleClick = (id: string) => {
+        setSelectedId(id);
+        navigate(`/playlist/${id}`);
+    };
 
     const { data, error, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } = useGetCurrentUserPlaylists({
         limit: 10,
         offset: 0,
     });
     // console.log('플레이리스트 >> ', data);
-    // console.log('inView~~~', inView);
 
     useEffect(() => {
         if (inView && hasNextPage && !isFetchingNextPage) {
@@ -40,7 +49,7 @@ const Playlist = () => {
         }
     }, [inView]);
 
-    const { data: user, isLoading: isUserLoading } = useGetCurrentUserProfile(); // 유저 정보 들고오기기
+    const { data: user, isLoading: isUserLoading } = useGetCurrentUserProfile(); // 유저 정보 들고오기
 
     if (!user) return <EmptyPlaylist />;
 
@@ -59,11 +68,13 @@ const Playlist = () => {
                     {data.pages.flatMap((page) =>
                         page.items.map((item, idx) => (
                             <PlaylistItem
+                                handleClick={handleClick}
                                 key={item.id + '-' + idx}
                                 id={item.id}
                                 name={item.name}
                                 artist={item.type + ' • ' + (item.owner?.display_name || 'no artist')}
                                 image={item.images?.[0]?.url || null}
+                                selectedId={selectedId}
                             />
                         ))
                     )}

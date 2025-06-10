@@ -10,6 +10,9 @@ const PlaylistItemContainer = styled(ListItemButton)(({ theme }) => ({
     '&:hover': {
         backgroundColor: theme.palette.action.hover,
     },
+    // '&.Mui-selected': {
+    //     backgroundColor: 'orange',
+    // },
 }));
 
 const PlaylistImg = styled(Avatar)({
@@ -25,9 +28,9 @@ const PlaylistText = styled('div')({
     justifyContent: 'center',
 });
 
-const PlaylistItem = ({ id, name, artist, image }): PlaylistProps => {
+const PlaylistItem = ({ id, name, artist, image, handleClick, selectedId }): PlaylistProps => {
     return (
-        <PlaylistItemContainer>
+        <PlaylistItemContainer selected={selectedId === id} onClick={() => handleClick(id)}>
             <PlaylistImg>
                 {image ? (
                     <img
