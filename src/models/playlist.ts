@@ -67,3 +67,24 @@ export interface getPlaylistRequest {
     fields?: string;
     additional_types?: string;
 }
+
+export interface getPlaylistItemsRequest extends getPlaylistRequest {
+    offset?: number;
+    limit?: number;
+}
+
+export type getPlaylistItemsResponse = ApiResponse<PlaylistTrack>;
+
+export interface PlaylistTrack {
+    added_at?: string | null; //Note: some very old playlists may return null in this field.
+    added_by?: {
+        external_urls?: ExternalUrls;
+        followers?: Followers;
+        href?: string;
+        id?: string;
+        type?: string;
+        uri?: string;
+    } | null;
+    is_local?: boolean;
+    track: Track | Episode;
+}
