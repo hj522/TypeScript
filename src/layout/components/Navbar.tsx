@@ -1,8 +1,10 @@
-import { Avatar, styled } from '@mui/material';
+import { Avatar, ListItemIcon, Menu, MenuItem, styled } from '@mui/material';
 import LoginButton from '../../common/components/LoginButton';
 import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 import Loading from '../../common/components/Loading';
 import BasicAvatar from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useState } from 'react';
 
 const ProfileContainer = styled('div')({
     display: 'flex',
@@ -21,21 +23,43 @@ const ProfileImg = styled('div')({
 const Navbar = () => {
     const { data: userProfile, isLoading } = useGetCurrentUserProfile();
 
+    // 메뉴가 열릴 위치의 기준이 됨
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // null 또는 HTML Element
+    const open = Boolean(anchorEl);
+
     if (isLoading) {
         return <Loading />;
     }
+
+    // 프로필 클릭
+    const OpenMenu = (e: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(e.currentTarget); // 클릭한 html 요소 저장
+    };
+
+    // menu 닫기
+    const CloseMenu = () => {
+        setAnchorEl(null);
+    };
+
+    const Logout = () => {
+        console.log('로그아웃');
+    };
 
     return (
         <ProfileContainer>
             {userProfile ? (
                 <ProfileImg>
-                    {userProfile.images[0] ? (
-                        <Avatar src={userProfile.images[0]?.url} />
-                    ) : (
-                        <Avatar>
-                            <BasicAvatar />
-                        </Avatar>
-                    )}
+                    <Avatar onClick={OpenMenu} src={userProfile.images[0]?.url}>
+                        {!userProfile.images[0] && <BasicAvatar />}
+                    </Avatar>
+                    <Menu anchorEl={anchorEl} open={open} onClose={CloseMenu}>
+                        <MenuItem onClick={Logout}>
+                            <ListItemIcon sx={{ color: 'white' }}>
+                                <LogoutIcon fontSize="small" />
+                            </ListItemIcon>
+                            Log out
+                        </MenuItem>
+                    </Menu>
                 </ProfileImg>
             ) : (
                 <LoginButton />
