@@ -61,7 +61,8 @@ const DetailInfoText = styled('div')({
 });
 
 const ListContainer = styled('div')({
-    height: '100vh',
+    // height: '300px',
+    height: 'calc(100% - 200px - 20px - 30px)',
     overflowY: 'auto',
     marginTop: '15px',
 });
@@ -89,7 +90,7 @@ const PlaylistDetailPage = () => {
         fetchNextPage,
     } = useGetPlaylistItems({ playlist_id: id, limit: PAGE_LIMIT, offset: 0 });
 
-    console.log('플리 ', playlistItems);
+    // console.log('플리 ', playlistItems);
 
     if (isLoading) {
         return <Loading />;
@@ -130,8 +131,7 @@ const PlaylistDetailPage = () => {
                 <ListContainer>
                     <Table style={{ marginTop: '10px' }}>
                         <TableHead>
-                            <TableRow ref={ref}>
-                                {isFetchingNextPage}
+                            <TableRow>
                                 <TableCell>#</TableCell>
                                 <TableCell>Title</TableCell>
                                 <TableCell>Album</TableCell>
@@ -151,6 +151,8 @@ const PlaylistDetailPage = () => {
                                     );
                                 })
                             )}
+                            <TableRow sx={{ height: '5px' }} ref={ref} />
+                            {isFetchingNextPage}
                         </TableBody>
                     </Table>
                 </ListContainer>
