@@ -88,3 +88,10 @@ export interface PlaylistTrack {
     is_local?: boolean;
     track: Track | Episode;
 }
+
+export interface CreatePlaylistRequest {
+    name: string;
+    playlistPublic?: boolean;
+    collaborative?: boolean;
+    description?: string;
+}
