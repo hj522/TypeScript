@@ -65,6 +65,11 @@ const ListContainer = styled('div')({
     height: 'calc(100% - 200px - 20px - 30px)',
     overflowY: 'auto',
     marginTop: '15px',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    '&::-webkit-scrollbar': {
+        display: 'none',
+    },
 });
 
 const PlaylistDetailPage = () => {

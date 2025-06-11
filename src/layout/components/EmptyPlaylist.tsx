@@ -1,5 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { getSpotifyAuthUrl } from '../../utils/auth';
+import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
 
 const PlaylistBox = styled(Box)(({ theme }) => ({
     width: '90%',
@@ -22,13 +24,23 @@ const CreateBtn = styled(Button)(({ theme }) => ({
 }));
 
 const EmptyPlaylist = () => {
+    const { data: user } = useGetCurrentUserProfile();
+
+    const CheckUser = () => {
+        if (!user) {
+            getSpotifyAuthUrl();
+        }
+    };
+
     return (
         <PlaylistBox>
             <Typography variant="h2" fontWeight={700}>
                 Create your first Playlist.
             </Typography>
             <Typography>It's easy, we'll help you.</Typography>
-            <CreateBtn variant="contained">Create Playlist</CreateBtn>
+            <CreateBtn variant="contained" onClick={CheckUser}>
+                Create Playlist
+            </CreateBtn>
         </PlaylistBox>
     );
 };

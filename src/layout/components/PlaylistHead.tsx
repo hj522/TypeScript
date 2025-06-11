@@ -2,6 +2,8 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Button, styled, Typography } from '@mui/material';
 import useCreatePlaylist from '../../hooks/useCreatePlaylist';
+import useGetCurrentUserProfile from '../../hooks/useGetCurrentUserProfile';
+import { getSpotifyAuthUrl } from '../../utils/auth';
 
 const PlaylistHeader = styled('div')({
     display: 'flex',
@@ -13,9 +15,15 @@ const PlaylistHeader = styled('div')({
 const PlaylistHead = () => {
     // 새 플레이리스트 추가
     const { mutate: createPlaylist } = useCreatePlaylist();
+    const { data: user } = useGetCurrentUserProfile();
 
     const handleCreatePlaylist = () => {
-        createPlaylist({ name: '나의 플레이 리스트' });
+        console.log('히히히히이');
+        if (!user) {
+            getSpotifyAuthUrl();
+        } else {
+            createPlaylist({ name: '나의 플레이 리스트' });
+        }
     };
 
     return (
