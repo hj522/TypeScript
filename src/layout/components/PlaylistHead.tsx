@@ -18,7 +18,6 @@ const PlaylistHead = () => {
     const { data: user } = useGetCurrentUserProfile();
 
     const handleCreatePlaylist = () => {
-        console.log('히히히히이');
         if (!user) {
             getSpotifyAuthUrl();
         } else {

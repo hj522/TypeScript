@@ -5,6 +5,7 @@ import Loading from '../../common/components/Loading';
 import BasicAvatar from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
+import useUserLogout from '../../hooks/useUserLogout';
 
 const ProfileContainer = styled('div')({
     display: 'flex',
@@ -22,6 +23,7 @@ const ProfileImg = styled('div')({
 
 const Navbar = () => {
     const { data: userProfile, isLoading } = useGetCurrentUserProfile();
+    const logout = useUserLogout();
 
     // 메뉴가 열릴 위치의 기준이 됨
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // null 또는 HTML Element
@@ -32,28 +34,24 @@ const Navbar = () => {
     }
 
     // 프로필 클릭
-    const OpenMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const openMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget); // 클릭한 html 요소 저장
     };
 
     // menu 닫기
-    const CloseMenu = () => {
+    const closeMenu = () => {
         setAnchorEl(null);
-    };
-
-    const Logout = () => {
-        console.log('로그아웃');
     };
 
     return (
         <ProfileContainer>
             {userProfile ? (
                 <ProfileImg>
-                    <Avatar onClick={OpenMenu} src={userProfile.images[0]?.url}>
+                    <Avatar onClick={openMenu} src={userProfile.images[0]?.url}>
                         {!userProfile.images[0] && <BasicAvatar />}
                     </Avatar>
-                    <Menu anchorEl={anchorEl} open={open} onClose={CloseMenu}>
-                        <MenuItem onClick={Logout}>
+                    <Menu anchorEl={anchorEl} open={open} onClose={closeMenu}>
+                        <MenuItem onClick={logout}>
                             <ListItemIcon sx={{ color: 'white' }}>
                                 <LogoutIcon fontSize="small" />
                             </ListItemIcon>

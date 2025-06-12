@@ -10,9 +10,6 @@ const PlaylistItemContainer = styled(ListItemButton)(({ theme }) => ({
     '&:hover': {
         backgroundColor: theme.palette.action.hover,
     },
-    // '&.Mui-selected': {
-    //     backgroundColor: 'orange',
-    // },
 }));
 
 const PlaylistImg = styled(Avatar)({

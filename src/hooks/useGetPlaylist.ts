@@ -8,6 +8,7 @@ const useGetPlaylist = (params: getPlaylistRequest) => {
         queryFn: () => {
             return getPlaylist(params);
         },
+        retry: false,
         // id값이 있을 때만 호출
         enabled: !!params.playlist_id,
     });

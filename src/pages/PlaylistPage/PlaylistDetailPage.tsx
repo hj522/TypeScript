@@ -1,7 +1,10 @@
-import { Navigate, useParams } from 'react-router';
+import { Navigate, NavLink, useNavigate, useParams } from 'react-router';
 import useGetPlaylist from '../../hooks/useGetPlaylist';
 import {
     Avatar,
+    Box,
+    Link,
+    Stack,
     styled,
     Table,
     TableBody,
@@ -11,6 +14,7 @@ import {
     TableRow,
     Typography,
 } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import PlaylistIcon from '@mui/icons-material/LibraryMusicOutlined';
 import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 import ErrorMessage from '../../common/components/ErrorMessage';
@@ -20,6 +24,9 @@ import DesktopPlaylistItem from './components/DesktopPlaylistItem';
 import { PAGE_LIMIT } from '../../configs/commonConfig';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import SpotifyLogo from '../../common/components/Spotify_icon.png';
+import LoginButton from '../../common/components/LoginButton';
+import { getSpotifyAuthUrl } from '../../utils/auth';
 
 const DetailContainer = styled(TableContainer)(({ theme }) => ({
     background: theme.palette.background.paper,
@@ -72,8 +79,22 @@ const ListContainer = styled('div')({
     },
 });
 
+const LoginBox = styled(Box)({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 'calc(100% - 64px)',
+    flexDirection: 'column',
+});
+
+const LoginBoxTypo = styled(Typography)({
+    fontWeight: '600',
+    marginBottom: '10px',
+});
+
 const PlaylistDetailPage = () => {
     const { ref, inView } = useInView();
+    const navigate = useNavigate();
 
     const { id } = useParams<{ id: string }>(); //제네릭 -> 정확하게어떤값을받을지알수있음
     if (id === undefined) return <Navigate to="/" />;
@@ -100,8 +121,60 @@ const PlaylistDetailPage = () => {
     if (isLoading) {
         return <Loading />;
     }
-    if (error) {
-        return <ErrorMessage errorMessage={error.message} />;
+
+    const login = () => {
+        getSpotifyAuthUrl();
+    };
+
+    // 로그인 에러
+    if (error || playlistItemsError) {
+        if (error?.status === 401 || playlistItemsError?.status === 401) {
+            return (
+                <LoginBox>
+                    <img src={SpotifyLogo} alt="Spotify Logo" style={{ width: '60px', marginBottom: '30px' }} />
+                    <LoginBoxTypo variant="h2">로그아웃 되었습니다.</LoginBoxTypo>
+                    <LoginBoxTypo variant="h2">
+                        다시{' '}
+                        <Link
+                            component="button"
+                            onClick={login}
+                            style={{
+                                color: '#1ed760',
+                                textDecoration: 'underline',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                padding: '2px',
+                            }}
+                        >
+                            로그인
+                        </Link>
+                        해주세요.
+                    </LoginBoxTypo>
+                    {/* <LoginButton /> */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <NavLink
+                            to="/"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '8px 12px',
+                                marginTop: '30px',
+                                color: '#1ed760',
+                                textDecoration: 'none',
+                                border: '2px solid #1ed760',
+                                borderRadius: '20px',
+                            }}
+                        >
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <HomeIcon />
+                                <LoginBoxTypo variant="body1">홈으로 돌아가기</LoginBoxTypo>
+                            </Stack>
+                        </NavLink>
+                    </div>
+                </LoginBox>
+            );
+        }
+        return <ErrorMessage errorMessage={'Failed to load'} />;
     }
 
     return (

@@ -19,7 +19,8 @@ export const getCurrentUserPlaylists = async ({
         });
         return response.data;
     } catch (error) {
-        throw new Error('fail to fetch current user playlists');
+        throw error;
+        // throw new Error('fail to fetch current user playlists');
     }
 };
 
@@ -30,7 +31,8 @@ export const getPlaylist = async (params: getPlaylistRequest): Promise<Playlist>
         });
         return response.data;
     } catch (error) {
-        throw new Error('fail to fetch playlist detail');
+        throw error;
+        // throw new Error('fail to fetch playlist detail');
     }
 };
 
@@ -41,7 +43,8 @@ export const getPlaylistItems = async (params: getPlaylistItemsRequest): Promise
         });
         return response.data;
     } catch (error) {
-        throw new Error('fail to fetch playlist items');
+        throw error;
+        // throw new Error('fail to fetch playlist items');
     }
 };
 
@@ -56,6 +59,7 @@ export const createPlaylist = async (user_id: string, params: CreatePlaylistRequ
         });
         return response.data;
     } catch (error) {
-        throw new Error('fail to create playlist');
+        throw error;
+        // throw new Error('fail to create playlist');
     }
 };

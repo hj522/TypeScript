@@ -14,6 +14,7 @@ const useGetCurrentUserPlaylists = ({
         queryFn: ({ pageParam = 0 }) => {
             return getCurrentUserPlaylists({ limit, offset: pageParam });
         },
+        retry: false,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => {
             //GetCurrentUserPlaylistResponse값이 lastPage로 전달됨
