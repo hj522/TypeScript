@@ -2,7 +2,7 @@ import loadingSpinner from './loadingSpinner.gif';
 
 const Loading = () => {
     return (
-        <div style={{ height: '100dvh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ height: '30dvh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img src={loadingSpinner} alt="loading" width="8%" />
         </div>
     );

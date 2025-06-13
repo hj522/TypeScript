@@ -27,6 +27,7 @@ import { useEffect } from 'react';
 import SpotifyLogo from '../../common/components/Spotify_icon.png';
 import LoginButton from '../../common/components/LoginButton';
 import { getSpotifyAuthUrl } from '../../utils/auth';
+import EmptyPlaylistWithSearch from './components/EmptyPlaylistWithSearch';
 
 const DetailContainer = styled(TableContainer)(({ theme }) => ({
     background: theme.palette.background.paper,
@@ -204,7 +205,7 @@ const PlaylistDetailPage = () => {
                 </DetailInfoText>
             </DetailHeader>
             {playlist?.tracks?.total === 0 ? (
-                <Typography>써치</Typography>
+                <EmptyPlaylistWithSearch />
             ) : (
                 <ListContainer>
                     <Table style={{ marginTop: '10px' }}>
