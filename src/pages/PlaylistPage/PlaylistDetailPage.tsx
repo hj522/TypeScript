@@ -95,7 +95,6 @@ const LoginBoxTypo = styled(Typography)({
 
 const PlaylistDetailPage = () => {
     const { ref, inView } = useInView();
-    const navigate = useNavigate();
 
     const { id } = useParams<{ id: string }>(); //제네릭 -> 정확하게어떤값을받을지알수있음
     if (id === undefined) return <Navigate to="/" />;

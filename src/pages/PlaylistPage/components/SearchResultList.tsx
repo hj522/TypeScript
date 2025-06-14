@@ -4,6 +4,11 @@ import { Box, Button, styled, Table, TableBody, TableCell, TableRow, Typography 
 import { useInView } from 'react-intersection-observer';
 import Loading from '../../../common/components/Loading';
 import SearchLoading from '../../../common/components/SearchLoading';
+import useAddItemToPlaylist from '../../../hooks/useAddItemToPlaylist';
+import useGetCurrentUserProfile from '../../../hooks/useGetCurrentUserProfile';
+import { idText } from 'typescript';
+import { getSpotifyAuthUrl } from '../../../utils/auth';
+import { useParams } from 'react-router';
 
 interface SearchResultListProps {
     list: Track[];
@@ -49,13 +54,27 @@ const ResultArtistTypo = styled(Typography)(({ theme }) => ({
 
 const SearchResultList = ({ list, hasNextPage, fetchNextPage, isFetchingNextPage }: SearchResultListProps) => {
     const { ref, inView } = useInView();
-    console.log('리스트 화긴', list);
+    // console.log('리스트 화긴', list);
+
+    const { mutate: addItem } = useAddItemToPlaylist();
+    const { data: user } = useGetCurrentUserProfile();
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         if (inView && hasNextPage && !isFetchingNextPage) {
             fetchNextPage();
         }
-    }, [inView]);
+    }, [inView, hasNextPage, isFetchingNextPage]);
+
+    const addItemtoPlaylist = (uri: string) => {
+        if (user) {
+            // id ->  4j8WfD3b79MWaeaxVXKNO1
+            // uri -> spotify:track:3gVbD5APaL2N4yDWM5YWiQ
+            addItem({ playlist_id: id, uris: [uri] });
+        } else {
+            getSpotifyAuthUrl();
+        }
+    };
 
     return (
         <ResultContainer>
@@ -76,7 +95,12 @@ const SearchResultList = ({ list, hasNextPage, fetchNextPage, isFetchingNextPage
                             </TableCell>
                             <TableCell>{result.album ? result.album?.name : 'Unknown'}</TableCell>
                             <TableCell>
-                                <Button>추가하기</Button>
+                                <Button
+                                    style={{ border: 'solid 2px #1ed760' }}
+                                    onClick={() => addItemtoPlaylist(result.uri)}
+                                >
+                                    추가하기
+                                </Button>
                             </TableCell>
                         </SearchResultTableRow>
                     ))}
