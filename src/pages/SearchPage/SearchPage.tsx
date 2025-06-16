@@ -27,13 +27,21 @@ const SearchPage = () => {
         <SearchContainer>
             <TextField
                 placeholder="찾으시는 음악이 있으신가요?"
-                style={{ width: '430px', marginBottom: '23px', backgroundColor: '#333333' }}
+                style={{
+                    width: '430px',
+                    marginBottom: '23px',
+                    backgroundColor: '#333333',
+                    borderRadius: '30px',
+                }}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
                             <SearchIcon style={{ color: 'white' }} />
                         </InputAdornment>
                     ),
+                    style: {
+                        borderRadius: 30,
+                    },
                 }}
             />
             <CategoryContainer>
