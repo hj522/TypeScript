@@ -8,8 +8,7 @@ interface ArtistCardProps {
 
 const ArtistCardContainer = styled('div')(({ theme }) => ({
     width: '100%',
-    minWidth: '170px',
-    height: '100%',
+    minWidth: '150px',
     borderRadius: '5px',
     padding: '10px',
     backgroundColor: theme.palette.background.paper,
@@ -29,8 +28,9 @@ const ArtistCardContainer = styled('div')(({ theme }) => ({
 
 const ImageContainer = styled('img')({
     width: '100%',
-    borderRadius: '50%',
     height: 'auto',
+    aspectRatio: '1/1',
+    borderRadius: '50%',
     marginBottom: '5px',
 });
 
@@ -42,8 +42,8 @@ const AlbumTypography = styled(Typography)({
 
 const ButtonDiv = styled('div')({
     position: 'absolute',
-    top: '95%',
-    right: '5%',
+    top: '94%',
+    right: '1%',
     opacity: '0',
     transition: 'opacity 0.2s ease-in-out',
 });

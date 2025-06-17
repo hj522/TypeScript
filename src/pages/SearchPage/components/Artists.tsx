@@ -8,9 +8,8 @@ interface ArtistsResultListProps {
 
 const ArtistContainer = styled('div')(({ theme }) => ({
     width: '100%',
-    height: '250px',
-    marginBottom: '6px',
-    border: 'solid 2px orange',
+    marginTop: '10px',
+    marginBottom: '20px',
     [theme.breakpoints.down('md')]: {
         width: '100%',
         height: 'auto',

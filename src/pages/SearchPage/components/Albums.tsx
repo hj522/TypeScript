@@ -8,8 +8,6 @@ interface AlbumResultListProps {
 
 const AlbumContainer = styled('div')(({ theme }) => ({
     width: '100%',
-    height: '290px',
-    // border: 'solid 2px green',
     [theme.breakpoints.down('md')]: {
         width: '100%',
         height: 'auto',

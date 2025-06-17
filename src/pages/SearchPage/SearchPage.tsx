@@ -9,11 +9,17 @@ import { SEARCH_TYPE } from '../../models/search';
 import SearchResults from './components/SearchResults';
 import NotFindIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
-const SearchContainer = styled('div')({
-    width: '100%',
-    height: '100%',
-    padding: '15px',
-});
+const SearchContainer = styled('div')(({ theme }) => ({
+    background: theme.palette.background.paper,
+    color: theme.palette.common.white,
+    height: 'calc(100% - 64px)',
+    overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+        display: 'none',
+    },
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+}));
 
 const CategoryContainer = styled('div')({
     width: '100%',
