@@ -35,10 +35,6 @@ const SearchPage = () => {
 
     const [inputKeyword, setInputKeyword] = useState(keyword);
 
-    useEffect(() => {
-        setInputKeyword(keyword); // url 주소창 변경
-    }, [keyword]);
-
     const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputKeyword(e.target.value);
         navigate(`/search/${e.target.value}`);

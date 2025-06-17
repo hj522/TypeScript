@@ -143,7 +143,7 @@ const Songs = ({ tracks }: SongsResultListProps) => {
     const [warning, setWarning] = useState<Boolean>(false);
 
     const [selectedTrack, setSelectedTrack] = useState<string | null>(null);
-    const [playlistId, setPlaylistId] = useState<string | null>(null);
+    // const [playlistId, setPlaylistId] = useState<string | null>(null);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -164,7 +164,7 @@ const Songs = ({ tracks }: SongsResultListProps) => {
 
     const showPlaylist = (item) => {
         addPlaylistItem({ playlist_id: item.id, uris: [selectedTrack] });
-        setPlaylistId(item.id);
+        // setPlaylistId(item.id);
         setIsAdd(true);
         closeMenu();
     };

@@ -1,7 +1,7 @@
 import { PlaylistProps } from '../../models/playlist';
 import { Avatar, ListItemButton, styled, Typography } from '@mui/material';
 import PlaylistIcon from '@mui/icons-material/LibraryMusicOutlined';
-import { useLocation } from 'react-router';
+import { useLocation, useMatch } from 'react-router';
 
 const PlaylistItemContainer = styled(ListItemButton)(({ theme }) => ({
     alignItems: 'center',
@@ -28,10 +28,11 @@ const PlaylistText = styled('div')({
 
 const PlaylistItem = ({ id, name, artist, image, handleClick, selectedId }): PlaylistProps => {
     const location = useLocation();
+    const isSearchPage = useMatch('/search/*'); //서치이후 좌측플레이리스트 선택해제용
 
     return (
         <PlaylistItemContainer
-            selected={selectedId === id && location.pathname !== '/search' && location.pathname !== '/'}
+            selected={selectedId === id && !isSearchPage && location.pathname !== '/'}
             onClick={() => handleClick(id)}
         >
             <PlaylistImg>

@@ -28,7 +28,7 @@ const useSearchItemsByKeyword = (params: SearchRequestParams) => {
                 return nextOffset ? parseInt(nextOffset) : undefined;
             }
         },
-        enabled: !!params.q,
+        enabled: !!params.q && !!clientToken,
     });
 };
 
