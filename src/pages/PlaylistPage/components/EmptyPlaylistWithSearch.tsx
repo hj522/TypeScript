@@ -1,11 +1,10 @@
-import { Box, Grid, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import useSearchItemsByKeyword from '../../../hooks/useSearchItemsByKeyword';
 import { SEARCH_TYPE } from '../../../models/search';
 import SearchResultList from './SearchResultList';
 import SearchIcon from '@mui/icons-material/Search';
 import Loading from '../../../common/components/Loading';
-import AlbumIcon from '@mui/icons-material/Album';
 import NotFindIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 const EmptyPlaylistWithSearch = () => {

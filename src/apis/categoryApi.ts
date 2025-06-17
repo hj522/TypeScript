@@ -4,7 +4,7 @@ import { getCategoryResponse } from '../models/category';
 
 export const getCategory = async (clientCredentialToken: string): Promise<getCategoryResponse> => {
     try {
-        const response = await axios.get(`${REACT_APP_SPOTIFY_BASE_URL}/browse/categories?limit=6&offset=13`, {
+        const response = await axios.get(`${REACT_APP_SPOTIFY_BASE_URL}/browse/categories`, {
             headers: {
                 Authorization: `Bearer ${clientCredentialToken}`,
             },

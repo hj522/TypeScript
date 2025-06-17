@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { Track } from '../../../models/track';
 import { Box, Button, styled, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
-import Loading from '../../../common/components/Loading';
 import SearchLoading from '../../../common/components/SearchLoading';
 import useAddItemToPlaylist from '../../../hooks/useAddItemToPlaylist';
 import useGetCurrentUserProfile from '../../../hooks/useGetCurrentUserProfile';
-import { idText } from 'typescript';
 import { getSpotifyAuthUrl } from '../../../utils/auth';
 import { useParams } from 'react-router';
 
