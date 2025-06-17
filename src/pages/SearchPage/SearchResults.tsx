@@ -1,9 +1,9 @@
-import { Track } from '../../../models/track';
-import { SimplifiedAlbum } from '../../../models/album';
-import { Artist } from '../../../models/artist';
-import Songs from './Songs';
-import Artists from './Artists';
-import Albums from './Albums';
+import { Track } from '../../models/track';
+import { SimplifiedAlbum } from '../../models/album';
+import { Artist } from '../../models/artist';
+import Songs from './components/Songs';
+import Artists from './components/Artists';
+import Albums from './components/Albums';
 import { styled } from '@mui/material';
 
 interface SearchResultListProps {

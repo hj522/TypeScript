@@ -3,11 +3,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import useGetCategory from '../../hooks/useGetCategory';
 import Loading from '../../common/components/Loading';
 import CategoryCard from '../../common/components/CategoryCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSearchItemsByKeyword from '../../hooks/useSearchItemsByKeyword';
 import { SEARCH_TYPE } from '../../models/search';
-import SearchResults from './components/SearchResults';
+import SearchResults from './SearchResults';
 import NotFindIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import { useNavigate, useParams } from 'react-router';
 
 const SearchContainer = styled('div')(({ theme }) => ({
     background: theme.palette.background.paper,
@@ -27,22 +28,26 @@ const CategoryContainer = styled('div')({
 });
 
 const SearchPage = () => {
+    const navigate = useNavigate();
     const { data, isLoading } = useGetCategory();
 
-    const [keyword, setKeyword] = useState<string>('');
+    const { keyword = '' } = useParams<{ keyword?: string }>();
 
-    const {
-        data: searchData,
-        error,
-        isLoading: isSearchLoading,
-    } = useSearchItemsByKeyword({
+    const [inputKeyword, setInputKeyword] = useState(keyword);
+
+    useEffect(() => {
+        setInputKeyword(keyword); // url 주소창 변경
+    }, [keyword]);
+
+    const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputKeyword(e.target.value);
+        navigate(`/search/${e.target.value}`);
+    };
+
+    const { data: searchData, isLoading: isSearchLoading } = useSearchItemsByKeyword({
         q: keyword,
         type: [SEARCH_TYPE.Track, SEARCH_TYPE.Album, SEARCH_TYPE.Artist],
     });
-
-    const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setKeyword(e.target.value);
-    };
 
     if (isLoading) {
         return <Loading />;
@@ -56,7 +61,7 @@ const SearchPage = () => {
     return (
         <SearchContainer>
             <TextField
-                value={keyword}
+                value={inputKeyword}
                 onChange={handleSearchKeyword}
                 placeholder="찾으시는 음악이 있으신가요?"
                 style={{

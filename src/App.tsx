@@ -7,7 +7,8 @@ import AppCallback from './AppCallback';
 const AppLayout = React.lazy(() => import('./layout/AppLayout'));
 const HomePage = React.lazy(() => import('./pages/Homepage/HomePage'));
 const SearchPage = React.lazy(() => import('./pages/SearchPage/SearchPage'));
-const SearchWithKeywordPage = React.lazy(() => import('./pages/SearchPage/SearchWithKeywordPage'));
+const SearchResults = React.lazy(() => import('./pages/SearchPage/SearchResults'));
+// const SearchWithKeywordPage = React.lazy(() => import('./pages/SearchPage/SearchWithKeywordPage'));
 const PlaylistDetailPage = React.lazy(() => import('./pages/PlaylistPage/PlaylistDetailPage'));
 const PlaylistPage = React.lazy(() => import('./pages/PlaylistPage/PlaylistPage'));
 
@@ -36,8 +37,8 @@ function App() {
                 <Route path="/" element={<AppLayout />}>
                     <Route index element={<HomePage />} />
                     <Route path="callback" element={<HomePage />} />
-                    <Route path="search" element={<SearchPage />} />
-                    <Route path="search/:keyword" element={<SearchWithKeywordPage />} />
+                    <Route path="search/:keyword?" element={<SearchPage />} />
+                    {/* <Route path="search/:keyword" element={<SearchResults />} /> */}
                     <Route path="playlist/:id" element={<PlaylistDetailPage />} />
                     <Route path="/playlist" element={<PlaylistPage />} />
                 </Route>
