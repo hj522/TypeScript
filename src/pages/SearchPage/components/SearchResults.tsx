@@ -19,9 +19,9 @@ const ResultContainer = styled('div')({
 const SearchResults = ({ tracks, albums, artists }: SearchResultListProps) => {
     return (
         <ResultContainer>
-            <Songs tracks={tracks} />
-            <Artists artists={artists} />
-            <Albums albums={albums} />
+            {tracks?.length > 0 && <Songs tracks={tracks} />}
+            {artists?.length > 0 && <Artists artists={artists} />}
+            {albums?.length > 0 && <Albums albums={albums} />}
         </ResultContainer>
     );
 };

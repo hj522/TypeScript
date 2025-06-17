@@ -51,7 +51,7 @@ const SearchPage = () => {
     const tracks = searchData?.pages[0]?.tracks?.items ?? [];
     const albums = searchData?.pages[0]?.albums?.items ?? [];
     const artists = searchData?.pages[0]?.artists?.items ?? [];
-    // const isAllEmpty = tracks.length === 0 && albums.length === 0 && artists.length === 0;
+    const isAllEmpty = tracks.length === 0 && albums.length === 0 && artists.length === 0;
 
     return (
         <SearchContainer>
@@ -81,7 +81,7 @@ const SearchPage = () => {
                     <Typography variant="h1" fontWeight={700} marginBottom="10px">
                         Browse All
                     </Typography>
-                    {data && data.categories.items.length > 0 ? (
+                    {data && data.categories.items.length > 0 && (
                         <Grid container spacing={2}>
                             {data.categories.items.map((category) => (
                                 <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category.id}>
@@ -89,15 +89,12 @@ const SearchPage = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                    ) : null}
+                    )}
                 </CategoryContainer>
             ) : isSearchLoading ? (
                 <Loading />
-            ) : searchData ? (
-                <SearchResults tracks={tracks} albums={albums} artists={artists} />
-            ) : (
-                //검색결과 없을때...
-                <Box display="flex" flexDirection="column" alignItems="center">
+            ) : isAllEmpty ? (
+                <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
                     <NotFindIcon
                         style={{
                             fontSize: 45,
@@ -106,12 +103,14 @@ const SearchPage = () => {
                         }}
                     />
                     <Typography variant="h1" fontWeight={700} mb="10px" color="text.secondary">
-                        '{keyword}' 검색 결과를 찾을 수 없습니다.
+                        검색 결과를 찾을 수 없습니다.
                     </Typography>
                     <Typography variant="h2" fontWeight={500} color="text.secondary">
                         입력한 단어의 철자가 맞는지 확인하거나 다른 키워드를 사용하세요.
                     </Typography>
                 </Box>
+            ) : (
+                <SearchResults tracks={tracks} albums={albums} artists={artists} />
             )}
         </SearchContainer>
     );
