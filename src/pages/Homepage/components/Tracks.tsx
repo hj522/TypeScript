@@ -3,7 +3,7 @@ import useGetNewReleases from '../../../hooks/useGetNewReleases';
 import ErrorMessage from '../../../common/components/ErrorMessage';
 import Card from '../../../common/components/Card';
 import Loading from '../../../common/components/Loading';
-const NewReleases = () => {
+const Tracks = () => {
     const { data, error, isLoading } = useGetNewReleases();
 
     if (isLoading) {
@@ -14,12 +14,10 @@ const NewReleases = () => {
         return <ErrorMessage errorMessage={error.message} />;
     }
 
-    console.log('data', data);
-
     return (
         <div>
-            <Typography variant="h1" paddingTop="8px" marginBottom="15px">
-                New Released Albums
+            <Typography variant="h1" paddingTop="8px" marginBottom="10px">
+                Tracks
             </Typography>
             {data && data.albums.items.length > 0 ? (
                 <Grid container spacing={2}>
@@ -36,4 +34,4 @@ const NewReleases = () => {
     );
 };
 
-export default NewReleases;
+export default Tracks;

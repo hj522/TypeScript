@@ -34,3 +34,10 @@ export interface Owner {
 export interface Restrictions {
     reason?: string;
 }
+
+export interface Context {
+    type?: string;
+    href?: string;
+    external_urls?: ExternalUrls;
+    uri?: string;
+}

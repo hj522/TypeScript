@@ -1,6 +1,6 @@
 import { SimplifiedAlbum } from './album';
 import { Artist } from './artist';
-import { ExternalUrls, Image, Restrictions } from './commonType';
+import { Context, ExternalUrls, Image, Restrictions } from './commonType';
 
 export interface Track {
     album?: SimplifiedAlbum;
@@ -104,4 +104,26 @@ export interface SimplifiedAudiobook {
     type: string;
     uri: string;
     total_chapters: number;
+}
+
+export interface GetPlayedTracksRequest {
+    limit?: number;
+    after?: number;
+    before?: number;
+}
+
+export interface GetPlayedTracksResponse {
+    href?: string;
+    limit?: number;
+    next?: string;
+    cursors?: {
+        after?: string;
+        before?: string;
+    };
+    total?: number;
+    items?: {
+        track?: Track;
+        played_at?: string;
+        context?: Context;
+    }[];
 }
