@@ -119,7 +119,7 @@ const AddMenu = styled(Menu)({
     '& .MuiPaper-root': {
         color: 'white',
         maxWidth: '25vh',
-        maxHeight: '20vw',
+        maxHeight: '50vh',
         overflowY: 'auto',
     },
 });
@@ -183,7 +183,17 @@ const Songs = ({ tracks }: SongsResultListProps) => {
     };
 
     return (
-        <div style={{ display: 'flex', width: '100%', gap: '20px' }}>
+        <Box
+            sx={{
+                display: 'flex',
+                width: '100%',
+                gap: '20px',
+                flexDirection: {
+                    xs: 'column', //모바일-세로정렬
+                    md: 'row',
+                },
+            }}
+        >
             <TopResultContainer>
                 <Typography variant="h1" fontWeight={700}>
                     Top Result
@@ -296,7 +306,7 @@ const Songs = ({ tracks }: SongsResultListProps) => {
                     </TableBody>
                 </Table>
             </SongsContainer>
-        </div>
+        </Box>
     );
 };
 export default Songs;

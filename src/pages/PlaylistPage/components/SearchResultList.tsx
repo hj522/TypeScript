@@ -7,6 +7,7 @@ import useAddItemToPlaylist from '../../../hooks/useAddItemToPlaylist';
 import useGetCurrentUserProfile from '../../../hooks/useGetCurrentUserProfile';
 import { getSpotifyAuthUrl } from '../../../utils/auth';
 import { useParams } from 'react-router';
+import useChangeMobileVer from '../../../hooks/useChangeMobileVer';
 
 interface SearchResultListProps {
     list: Track[];
@@ -51,8 +52,8 @@ const ResultArtistTypo = styled(Typography)(({ theme }) => ({
 }));
 
 const SearchResultList = ({ list, hasNextPage, fetchNextPage, isFetchingNextPage }: SearchResultListProps) => {
+    const isMobileVer = useChangeMobileVer();
     const { ref, inView } = useInView();
-    // console.log('리스트 화긴', list);
 
     const { mutate: addItem } = useAddItemToPlaylist();
     const { data: user } = useGetCurrentUserProfile();
@@ -91,7 +92,7 @@ const SearchResultList = ({ list, hasNextPage, fetchNextPage, isFetchingNextPage
                                     </Box>
                                 </ResultBox>
                             </TableCell>
-                            <TableCell>{result.album ? result.album?.name : 'Unknown'}</TableCell>
+                            {!isMobileVer && <TableCell>{result.album ? result.album?.name : 'Unknown'}</TableCell>}
                             <TableCell>
                                 <Button
                                     style={{ border: 'solid 2px #1ed760' }}

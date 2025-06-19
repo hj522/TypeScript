@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled, Typography, useMediaQuery } from '@mui/material';
 import { NavLink, Outlet } from 'react-router';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,6 +7,7 @@ import Playlist from './components/Playlist';
 import Navbar from './components/Navbar';
 import { Suspense } from 'react';
 import Loading from '../common/components/Loading';
+import Mobilebar from './components/Mobilebar';
 
 const Layout = styled('div')({
     display: 'flex',
@@ -70,37 +71,42 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
 }));
 
 const AppLayout = () => {
+    const isMobileVer = useMediaQuery('(max-width:768px)'); //모바일버전인지 체크
+
     return (
-        <Layout>
-            <Sidebar>
-                {/* 홈,서치 */}
+        <>
+            <Layout>
+                <Sidebar>
+                    {/* 홈,서치 */}
+                    <ContentBox>
+                        <NavList>
+                            <StyledNavLink to="/">
+                                <HomeIcon />
+                                <Typography variant="h2" fontWeight={700}>
+                                    Home
+                                </Typography>
+                            </StyledNavLink>
+                            <StyledNavLink to="/search">
+                                <SearchIcon />
+                                <Typography variant="h2" fontWeight={700}>
+                                    Search
+                                </Typography>
+                            </StyledNavLink>
+                        </NavList>
+                    </ContentBox>
+                    {/* 플레이리스트 */}
+                    <PlaylistBox>
+                        <PlaylistHead />
+                        <Playlist />
+                    </PlaylistBox>
+                </Sidebar>
                 <ContentBox>
-                    <NavList>
-                        <StyledNavLink to="/">
-                            <HomeIcon />
-                            <Typography variant="h2" fontWeight={700}>
-                                Home
-                            </Typography>
-                        </StyledNavLink>
-                        <StyledNavLink to="/search">
-                            <SearchIcon />
-                            <Typography variant="h2" fontWeight={700}>
-                                Search
-                            </Typography>
-                        </StyledNavLink>
-                    </NavList>
+                    <Navbar />
+                    <Outlet />
                 </ContentBox>
-                {/* 플레이리스트 */}
-                <PlaylistBox>
-                    <PlaylistHead />
-                    <Playlist />
-                </PlaylistBox>
-            </Sidebar>
-            <ContentBox>
-                <Navbar />
-                <Outlet />
-            </ContentBox>
-        </Layout>
+            </Layout>
+            {isMobileVer && <Mobilebar />}
+        </>
     );
 };
 

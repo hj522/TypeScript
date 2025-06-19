@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import useGetCategory from '../../hooks/useGetCategory';
 import Loading from '../../common/components/Loading';
 import CategoryCard from '../../common/components/CategoryCard';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useSearchItemsByKeyword from '../../hooks/useSearchItemsByKeyword';
 import { SEARCH_TYPE } from '../../models/search';
 import SearchResults from './SearchResults';
@@ -60,11 +60,17 @@ const SearchPage = () => {
                 value={inputKeyword}
                 onChange={handleSearchKeyword}
                 placeholder="찾으시는 음악이 있으신가요?"
-                style={{
-                    width: '430px',
+                sx={{
+                    width: {
+                        xs: '100%',
+                        sm: '430px',
+                    },
                     marginBottom: '23px',
                     backgroundColor: '#333333',
                     borderRadius: '30px',
+                    input: {
+                        borderRadius: '30px',
+                    },
                 }}
                 InputProps={{
                     startAdornment: (

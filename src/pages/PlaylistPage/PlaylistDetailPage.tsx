@@ -28,6 +28,7 @@ import SpotifyLogo from '../../common/components/Spotify_icon.png';
 import LoginButton from '../../common/components/LoginButton';
 import { getSpotifyAuthUrl } from '../../utils/auth';
 import EmptyPlaylistWithSearch from './components/EmptyPlaylistWithSearch';
+import useChangeMobileVer from '../../hooks/useChangeMobileVer';
 
 const DetailContainer = styled(TableContainer)(({ theme }) => ({
     background: theme.palette.background.paper,
@@ -93,7 +94,38 @@ const LoginBoxTypo = styled(Typography)({
     marginBottom: '10px',
 });
 
+const MobileDetailHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: 'auto',
+    padding: '20px',
+    marginTop: '20px',
+    borderRadius: '8px',
+    border: 'solid 3px #1ed760',
+    backgroundColor: theme.palette.background.default,
+}));
+
+const MobileDetailAlbumImg = styled(Avatar)({
+    width: '180px',
+    height: '180px',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    marginBottom: '20px',
+});
+
+const MobileDetailInfoText = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    // alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '8px',
+});
+
 const PlaylistDetailPage = () => {
+    const isMobileVer = useChangeMobileVer();
     const { ref, inView } = useInView();
 
     const { id } = useParams<{ id: string }>(); //제네릭 -> 정확하게어떤값을받을지알수있음
@@ -177,18 +209,56 @@ const PlaylistDetailPage = () => {
         return <ErrorMessage errorMessage={'Failed to load'} />;
     }
 
-    return (
+    return isMobileVer ? (
+        //모바일 화면
+        <DetailContainer>
+            <MobileDetailHeader>
+                <MobileDetailAlbumImg>
+                    {playlist?.images ? (
+                        <img src={playlist?.images[0].url} style={{ width: '100%', height: '100%' }} />
+                    ) : (
+                        <PlaylistIcon fontSize="large" />
+                    )}
+                </MobileDetailAlbumImg>
+                <MobileDetailInfoText>
+                    <Typography variant="body1" fontWeight={700} style={{ marginBottom: '5px' }}>
+                        {playlist?.name}
+                    </Typography>
+                    <Typography variant="body2" fontWeight={500}>
+                        <MusicNoteOutlinedIcon sx={{ fontSize: 'small', verticalAlign: 'middle', color: '#1ed760' }} />
+                        {playlist?.owner?.display_name + ' • ' + playlist?.tracks.total + ' songs '}
+                    </Typography>
+                </MobileDetailInfoText>
+            </MobileDetailHeader>
+
+            {playlist?.tracks?.total === 0 ? (
+                <EmptyPlaylistWithSearch />
+            ) : (
+                <ListContainer>
+                    <Table style={{ marginTop: '10px' }}>
+                        <TableBody>
+                            {playlistItems?.pages.map((page, pIdx) =>
+                                page.items.map((item, idx) => (
+                                    <DesktopPlaylistItem
+                                        key={pIdx * PAGE_LIMIT + idx + 1}
+                                        index={pIdx * PAGE_LIMIT + idx + 1}
+                                        item={item}
+                                    />
+                                ))
+                            )}
+                            <TableRow sx={{ height: '5px' }} ref={ref} />
+                            {isFetchingNextPage}
+                        </TableBody>
+                    </Table>
+                </ListContainer>
+            )}
+        </DetailContainer>
+    ) : (
         <DetailContainer>
             <DetailHeader>
                 <DetailAlbumImg>
                     {playlist?.images ? (
-                        <img
-                            src={playlist?.images[0].url}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                            }}
-                        ></img>
+                        <img src={playlist?.images[0].url} style={{ width: '100%', height: '100%' }} />
                     ) : (
                         <PlaylistIcon fontSize="large" />
                     )}
@@ -203,6 +273,7 @@ const PlaylistDetailPage = () => {
                     </Typography>
                 </DetailInfoText>
             </DetailHeader>
+
             {playlist?.tracks?.total === 0 ? (
                 <EmptyPlaylistWithSearch />
             ) : (
@@ -219,15 +290,13 @@ const PlaylistDetailPage = () => {
                         </TableHead>
                         <TableBody>
                             {playlistItems?.pages.map((page, pIdx) =>
-                                page.items.map((item, idx) => {
-                                    return (
-                                        <DesktopPlaylistItem
-                                            key={pIdx * PAGE_LIMIT + idx + 1}
-                                            index={pIdx * PAGE_LIMIT + idx + 1}
-                                            item={item}
-                                        />
-                                    );
-                                })
+                                page.items.map((item, idx) => (
+                                    <DesktopPlaylistItem
+                                        key={pIdx * PAGE_LIMIT + idx + 1}
+                                        index={pIdx * PAGE_LIMIT + idx + 1}
+                                        item={item}
+                                    />
+                                ))
                             )}
                             <TableRow sx={{ height: '5px' }} ref={ref} />
                             {isFetchingNextPage}
