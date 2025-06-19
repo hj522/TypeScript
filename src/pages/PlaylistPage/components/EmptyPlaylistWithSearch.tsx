@@ -31,7 +31,14 @@ const EmptyPlaylistWithSearch = () => {
                 value={keyword}
                 onChange={handleSearchKeyword}
                 placeholder="플레이리스트에 추가할 곡을 찾아보세요."
-                style={{ width: '430px', marginBottom: '23px', backgroundColor: '#333333' }}
+                sx={{
+                    width: {
+                        xs: '100%',
+                        sm: '430px',
+                    },
+                    marginBottom: '23px',
+                    backgroundColor: '#333333',
+                }}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
