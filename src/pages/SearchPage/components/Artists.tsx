@@ -18,7 +18,6 @@ const ArtistContainer = styled('div')(({ theme }) => ({
 }));
 
 const Artists = ({ artists }: ArtistsResultListProps) => {
-    // console.log('artists', artists);
     return (
         <ArtistContainer>
             <Typography variant="h1" fontWeight={700} mb={2}>

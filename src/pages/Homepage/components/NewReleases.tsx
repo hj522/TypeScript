@@ -14,11 +14,9 @@ const NewReleases = () => {
         return <ErrorMessage errorMessage={error.message} />;
     }
 
-    console.log('data', data);
-
     return (
         <div>
-            <Typography variant="h1" paddingTop="8px" marginBottom="15px">
+            <Typography variant="h1" paddingTop="8px" marginBottom="10px">
                 New Released Albums
             </Typography>
             {data && data.albums.items.length > 0 ? (

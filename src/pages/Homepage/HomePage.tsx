@@ -1,8 +1,8 @@
 import { styled } from '@mui/material';
 import NewReleases from './components/NewReleases';
-import Albums from './components/Albums';
-import Tracks from './components/Tracks';
 import RecentlyPlayedTracks from './components/RecentlyPlayedTracks';
+import SeveralAlbums from './components/SeveralAlbums';
+import SeveralArtists from './components/SeveralArtists';
 
 const HomeContainer = styled('div')({
     height: 'calc(100% - 64px)',
@@ -15,14 +15,14 @@ const HomeContainer = styled('div')({
 });
 
 const HomePage = () => {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token') || '';
 
     return (
         <HomeContainer>
             <NewReleases />
             {accessToken ? <RecentlyPlayedTracks /> : null}
-            {/* <Tracks />
-            <Albums /> */}
+            <SeveralAlbums />
+            <SeveralArtists />
         </HomeContainer>
     );
 };

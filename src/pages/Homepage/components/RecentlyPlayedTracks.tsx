@@ -20,13 +20,12 @@ const RecentlyPlayedTracks = () => {
     const { data: user } = useGetCurrentUserProfile();
     const { data } = useGetRecentlyPlayedTracks(params);
 
-    // console.log('최근 트랙 data', data);
-    if (!user) return <div>없숨</div>;
+    if (!user) return null;
 
     return (
         <div>
             {!data || data.items.length < 0 ? (
-                <div>123123123213</div>
+                <div></div>
             ) : (
                 <>
                     <Typography variant="h1" paddingTop="8px" marginBottom="15px">

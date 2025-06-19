@@ -1,15 +1,18 @@
+import axios from 'axios';
 import {
     AddItemsToPlaylistRequest,
     AddItemsToPlaylistResponse,
     CreatePlaylistRequest,
     GetCurrentUserPlaylistRequest,
     GetCurrentUserPlaylistResponse,
+    GetFeaturedPlaylistsResponse,
     getPlaylistItemsRequest,
     getPlaylistItemsResponse,
     getPlaylistRequest,
     Playlist,
 } from '../models/playlist';
 import api from '../utils/api';
+import { REACT_APP_SPOTIFY_BASE_URL } from '../configs/commonConfig';
 
 export const getCurrentUserPlaylists = async ({
     limit,

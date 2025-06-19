@@ -23,4 +23,12 @@ export interface SimplifiedAlbum {
     type: string;
     uri: string;
     artists: Artist[];
+    copyrights: {
+        text?: string;
+        type?: string;
+    }[];
+}
+
+export interface GetSeveralAlbumsResponse {
+    albums: SimplifiedAlbum[];
 }

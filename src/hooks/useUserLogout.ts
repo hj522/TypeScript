@@ -14,6 +14,7 @@ const useUserLogout = () => {
 
         queryClient.refetchQueries(); // 쿼리 다시 실행 시도
         navigate(location.pathname, { replace: true });
+        window.location.reload();
         // navigate('/');
     };
 

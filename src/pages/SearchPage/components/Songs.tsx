@@ -131,7 +131,7 @@ const AddMenuItem = styled(MenuItem)({
 });
 
 const Songs = ({ tracks }: SongsResultListProps) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { data: user } = useGetCurrentUserProfile();
     const { data: playlistData } = useGetCurrentUserPlaylists({
         offset: 0,
