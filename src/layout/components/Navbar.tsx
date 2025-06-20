@@ -29,9 +29,9 @@ const Navbar = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // null 또는 HTML Element
     const open = Boolean(anchorEl);
 
-    if (isLoading) {
-        return <Loading />;
-    }
+    // if (isLoading) {
+    //     return <Loading />;
+    // }
 
     // 프로필 클릭
     const openMenu = (e: React.MouseEvent<HTMLElement>) => {
